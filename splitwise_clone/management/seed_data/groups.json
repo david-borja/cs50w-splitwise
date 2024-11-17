@@ -1,0 +1,14 @@
+[
+  {
+      "name": "Piso Vlc",
+      "description": "Gastos del piso",
+      "icon": "🏠",
+      "participants": ["david", "manuela", "rita", "alexa"]
+  },
+  {
+      "name": "Nadals",
+      "description": "Regalos de familia",
+      "icon": "🎄",
+      "participants": ["david", "maria", "lina", "manolo"]
+  }
+]

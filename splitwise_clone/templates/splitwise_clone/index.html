@@ -1,13 +1,102 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Splitwise | cs50w</title>
-  {% tailwind_css %}
-</head>
-<body>
-  <h1>Hello world</h1>
-</body>
-</html>
+{% extends "splitwise_clone/layout.html"%} {% block body %}
+<h2
+  class="max-w-sm text-2xl mx-auto mb-2 font-semibold text-gray-900 dark:text-white"
+>
+  Splitwise CS50w
+</h2>
+<main class="flex flex-col justify-between h-[85vh]">
+  <ul>
+    {% for group in groups %}
+    <article
+      class="max-w-sm p-6 mx-auto mb-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    >
+      <a href="#">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="text-4xl">{{ group.icon }}</div>
+            <h5 class="text-2xl tracking-tight text-gray-900 dark:text-white">
+              {{ group.name }}
+            </h5>
+          </div>
+          <div
+            class="inline-flex items-center text-sm font-medium text-center text-white"
+          >
+            <svg
+              fill="white"
+              height="10px"
+              width="10px"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+            >
+              <g stroke-width="0"></g>
+              <g stroke-linecap="round" stroke-linejoin="round"></g>
+              <g>
+                <g>
+                  <g>
+                    <path
+                      d="M388.418,240.915L153.752,6.248c-8.331-8.331-21.839-8.331-30.17,0c-8.331,8.331-8.331,21.839,0,30.17L343.163,256 L123.582,475.582c-8.331,8.331-8.331,21.839,0,30.17c8.331,8.331,21.839,8.331,30.17,0l234.667-234.667 C396.749,262.754,396.749,249.246,388.418,240.915z"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </article>
+    {% endfor %}
+  </ul>
+  <div class="max-w-sm">
+    <button class="mx-auto block">
+        <svg
+      width="64px"
+      height="64px"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      class="text-blue-400"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <g id="style=doutone">
+          <g id="add-circle">
+            <path
+              id="vector (Stroke)"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75ZM1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C17.9371 1.25 22.75 6.06294 22.75 12C22.75 17.9371 17.9371 22.75 12 22.75C6.06294 22.75 1.25 17.9371 1.25 12Z"
+              fill="currentColor"
+            ></path>
+            <path
+              id="vector (Stroke)_2"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 7.00744C12.4142 7.00744 12.75 7.34323 12.75 7.75744L12.75 16.2427C12.75 16.6569 12.4142 16.9927 12 16.9927C11.5857 16.9927 11.25 16.6569 11.25 16.2427L11.25 7.75743C11.25 7.34322 11.5858 7.00744 12 7.00744Z"
+              fill="currentColor"
+            ></path>
+            <path
+              id="vector (Stroke)_3"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M17 12C17 12.4142 16.6642 12.75 16.25 12.75L7.76476 12.75C7.35055 12.75 7.01476 12.4142 7.01476 12C7.01477 11.5857 7.35055 11.25 7.76477 11.25L16.25 11.25C16.6642 11.25 17 11.5858 17 12Z"
+              fill="currentColor"
+            ></path>
+          </g>
+        </g>
+      </g>
+    </svg>
+    </button>
+    <span class="text-gray-900 dark:text-white text-center block mt-1">
+      Add splitwise
+    </span>
+  </div>
+</main>
+{% endblock %}

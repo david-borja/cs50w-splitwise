@@ -1,0 +1,48 @@
+{% extends "splitwise_clone/layout.html" %}
+{% block body %}
+    {% load custom_tags %}
+<h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Register</h2>
+
+{% if message %}
+<div class="text-sm font-semibold text-center text-red-600">{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'register' %}" method="post" class="max-w-md mx-auto my-6">
+  {% csrf_token %}
+  <div class="mb-6">
+    {% if message == "Username already taken."%}
+      {% custom_error_input 'username' 'text' 'Username' 'Your Username' %}
+    {% else %}
+      {% custom_input 'username' 'text' 'Username' 'Your Username' %}
+    {% endif %}
+  </div>
+  <div class="mb-6">
+    {% custom_input 'email' 'email' 'Email' 'Your Email' %}
+  </div>
+  <div class="mb-6">
+    {% if message == "Passwords must match." %}
+      {% custom_error_input 'password' 'password' 'Password' 'Your Password' %}
+    {% else %}
+      {% custom_input 'password' 'password' 'Password' 'Your Password' %}
+    {% endif %}
+  </div>
+  <div class="mb-6">
+    {% if message == "Passwords must match." %}
+      {% custom_error_input 'confirmation' 'password' 'Password confirmation' 'Confirm Password' %}
+    {% else %}
+      {% custom_input 'confirmation' 'password' 'Password confirmation' 'Confirm Password' %}
+    {% endif %}
+  </div>
+  {% custom_submit_button 'Submit' %}
+</form>
+
+<p
+  class="block mb-2 text-sm font-medium text-center text-gray-900 dark:text-white"
+>
+  Already have an account?
+  <a class="text-blue-600 hover:underline" href="{% url 'login' %}"
+    >Log In here</a
+  >
+</p>
+
+{% endblock %}

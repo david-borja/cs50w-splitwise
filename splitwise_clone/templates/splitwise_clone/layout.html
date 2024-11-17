@@ -1,0 +1,13 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Splitwise | cs50w</title>
+    {% tailwind_css %}
+  </head>
+  <body class="max-w-4xl h-screen p-3 mx-auto dark:bg-gray-900">
+    {% block body %} {% endblock %}
+  </body>
+  
