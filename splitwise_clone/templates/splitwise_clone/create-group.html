@@ -1,0 +1,79 @@
+{% extends "splitwise_clone/layout.html"%} {% block body %} {% load custom_tags %}
+<form
+  id="create-group-form"
+  action="{% url 'create_group' %}"
+  method="post"
+  class="max-w-md mx-auto my-6"
+>
+  {% csrf_token %}
+  <div class="mb-6">
+    {% custom_input 'group_name' 'text' 'City Trip' 'Title' %}
+  </div>
+  <label
+    for="participants"
+    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+  >
+    Participants
+  </label>
+  <section class="mb-6">
+    <div id="participants-list">
+      <input
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-t-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+        name="participant-1"
+        type="text"
+        required
+        value="{{ request.user }}"
+      />
+      <input
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        name="participant-2"
+        type="text"
+        placeholder="Participant Name"
+        required
+      /></div>
+    <button
+      type="button"
+      id="add-participant"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-b-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 text-center hover:underline"
+    >
+      Add Another Participant
+    </button>
+  </section>
+  {% custom_submit_button 'Create splitwise' %}
+</form>
+<script type="module">
+  const $ = (selector) => document.querySelector(selector)
+
+  const setAttributes = (el, attributes) => {
+    const keys = Object.keys(attributes)
+    for (const key of keys) {
+      const value = attributes[key]
+      el.setAttribute(key, value)
+    }
+  }
+
+  let newParticipantId = 3
+  const $addParticipantButton = $('#add-participant')
+  $addParticipantButton.onclick = () => {
+    const $participantsList = $('#participants-list')
+    if (!$participantsList.lastChild.value?.trim()) {
+      $participantsList.lastChild.focus()
+      return
+    }
+
+    const $newParticipantInput = document.createElement('input')
+    const inputAttributes = {
+      class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+      name: `participant-${newParticipantId}`,
+      type: "text",
+      placeholder: "Participant Name",
+      required: ""
+    }
+    setAttributes($newParticipantInput, inputAttributes)
+    $participantsList.appendChild($newParticipantInput)
+    newParticipantId += 1;
+  }
+
+  const $createGroupFrom = $('#create-group-form')
+</script>
+{% endblock %}

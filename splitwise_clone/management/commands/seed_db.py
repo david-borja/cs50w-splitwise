@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from splitwise_clone.models import User, UserGroup
+from splitwise_clone.models import User, UserGroup, UserAlias
 import json
 import os
 
@@ -17,14 +17,12 @@ def insert_groups(self, data):
             name = item["name"]
             description = item["description"]
             icon = item["icon"]
-            participants = User.objects.filter(username__in=item["participants"])
             group = UserGroup(
                 name=name,
                 description=description,
                 icon=icon,
             )
             group.save()
-            group.participants.set(participants)
             self.stdout.write(self.style.SUCCESS(f"Created group: '{name}'"))
         self.stdout.write(self.style.SUCCESS("GROUPS seeding completed."))
     except Exception as err:
@@ -56,9 +54,28 @@ def insert_users(self, data):
     except Exception as err:
         self.stdout.write(self.style.ERROR("An error occurred:", err))
 
+
+def insert_aliases(self, data):
+    try:
+        for item in data:
+            alias = item["alias"],
+            group = UserGroup.objects.get(name=item["group"])
+            UserAlias(
+                alias=alias,
+                group=group
+            )
+            self.stdout.write(
+                self.style.SUCCESS(f"Created alias '{item['alias']}'")
+            )
+        self.stdout.write(self.style.SUCCESS("ALIAS seeding completed."))
+    except Exception as err:
+        self.stdout.write(self.style.ERROR("An error occurred:", err))
+
+
 integrator_switch = {
     "users.json": insert_users,
     "groups.json": insert_groups,
+    "aliases.json": insert_aliases,
 }
 
 
@@ -70,7 +87,7 @@ class Command(BaseCommand):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         # Construct the path to the JSON file
         seed_data_dir = os.path.join(script_dir, "../seed_data")
-        data_file_names = ["users.json", "groups.json"] # os.listdir(seed_data_dir)
+        data_file_names = ["users.json", "groups.json", "aliases.json"] # os.listdir(seed_data_dir)
         for data_file_name in data_file_names:
             if data_file_name not in integrator_switch:
                 raise Exception(f"{data_file_name} file doesn't belong to seed data")

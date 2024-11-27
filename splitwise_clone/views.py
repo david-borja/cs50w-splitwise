@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
-from .models import User, UserGroup
+from .models import User, UserGroup, UserAlias
 
 
 @login_required()
@@ -13,13 +13,34 @@ def index(request):
     return render(request, "splitwise_clone/index.html", {"groups": groups})
 
 
+@login_required()
+def create_group(request):
+    if request.method == "POST":
+        participants = []
+        group_name = request.POST.get("group_name")
+        participantIterator = 0
+        participant = request.POST.get(f"participant-{participantIterator + 1}", None)
+        while participant:
+            participants.append(participant)
+            participantIterator = participantIterator + 1
+            participant = request.POST.get(f"participant-{participantIterator + 1}", None)
+
+        group = UserGroup(name=group_name)
+        group.save()
+        created_group = UserGroup.objects.get(name=group_name)
+        user_aliases = []
+        for participant in participants:
+            user_aliases.append(UserAlias(alias=participant, group=created_group))
+        UserAlias.objects.bulk_create(user_aliases)
+        return HttpResponseRedirect(reverse("index"))
+    return render(request, "splitwise_clone/create-group.html")
+
 def login_view(request):
     if request.method == "POST":
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
-        print(user)
         # Check if authentication successful
         if user is not None:
             login(request, user)
