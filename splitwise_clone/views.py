@@ -1,11 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
 from .models import User, UserGroup, UserAlias
 
+EXPENSES_SECTION = "expenses"
+BALANCES_SECTION = "balances"
+DEFAULT_SECTION = EXPENSES_SECTION
 
 @login_required()
 def index(request):
@@ -34,6 +37,22 @@ def create_group(request):
         UserAlias.objects.bulk_create(user_aliases)
         return HttpResponseRedirect(reverse("index"))
     return render(request, "splitwise_clone/create-group.html")
+
+
+@login_required()
+def group(request, group_id, section=DEFAULT_SECTION):
+    if section not in [EXPENSES_SECTION, BALANCES_SECTION]:
+        return HttpResponse("Invalid section", status=404)
+
+    group = UserGroup.objects.get(pk=group_id)
+    return render(request, "splitwise_clone/group.html", {
+        "group": group,
+        "section": section,
+        "SECTIONS": {
+            "EXPENSES": EXPENSES_SECTION,
+            "BALANCES": BALANCES_SECTION,
+        },
+    })
 
 def login_view(request):
     if request.method == "POST":

@@ -1,0 +1,52 @@
+{% extends "splitwise_clone/layout.html" %}
+{% block body %}
+<div class="mt-8 text-center">
+  <span>{{ group.icon }}</span>
+  <h1 class="text-white">{{ group.name }}</h1>
+</div>
+<div class="flex p-1 mt-2 text-center text-white bg-gray-800 rounded-lg">
+  {% if section == SECTIONS.BALANCES %}
+    <button id="expenses-button" data-section="expenses" class="w-1/2">
+      Expenses
+    </button>
+    <button id="balances-button" data-section="balances" class="w-1/2 selected">
+      <div class="bg-gray-600 rounded-md">Balances</div>
+    </button>
+  {% else %}
+    <button id="expenses-button" data-section="expenses" class="w-1/2 selected">
+      <div class="bg-gray-600 rounded-md">Expenses</div>
+    </button>
+    <button id="balances-button" data-section="balances" class="w-1/2">Balances</button>
+  {% endif %}
+</div>
+<script>
+  const $ = (selector) => document.querySelector(selector)
+  const serverSection = '{{ section }}'
+
+  // if visited url is /, sync url section with server section
+  if (!window.location.pathname.includes(serverSection)) {
+    history.pushState({ section: serverSection }, "", `${window.location.pathname}/${serverSection}`)
+  } else {
+    // save server section to state and keep the url unchanged
+    history.replaceState({ section: serverSection}, "", window.location.href)
+  }
+
+  document.querySelectorAll('button').forEach(button => {
+    button.onclick = function() {
+      const section = history.state.section
+      const { section: sectionClicked } = this.dataset
+      if (sectionClicked !== section) {
+        const buttonToBlur = section
+        $(`#${buttonToBlur}-button`).children[0].remove()
+        $(`#${buttonToBlur}-button`).innerText = buttonToBlur
+        $(`#${buttonToBlur}-button`).classList.add('capitalize')
+        $(`#${buttonToBlur}-button`).classList.remove('selected')
+        $(`#${sectionClicked}-button`).classList.add('selected')
+        $(`#${sectionClicked}-button`).innerHTML = `<div class="capitalize bg-gray-600 rounded-md">${sectionClicked}</div>`
+        const basePath = window.location.pathname.split('/').slice(0, -1).join('/')
+        history.pushState({ section: sectionClicked }, "", `${basePath}/${sectionClicked}`)
+      }
+    }
+  })
+</script>
+{% endblock %}
