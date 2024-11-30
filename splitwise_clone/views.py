@@ -45,14 +45,20 @@ def group(request, group_id, section=DEFAULT_SECTION):
         return HttpResponse("Invalid section", status=404)
 
     group = UserGroup.objects.get(pk=group_id)
-    return render(request, "splitwise_clone/group.html", {
-        "group": group,
-        "section": section,
-        "SECTIONS": {
-            "EXPENSES": EXPENSES_SECTION,
-            "BALANCES": BALANCES_SECTION,
+    return render(
+        request,
+        "splitwise_clone/group.html",
+        {
+            "group": group,
+            "section": section,
+            "expenses_visibility": "block" if section == EXPENSES_SECTION else "hidden",
+            "balances_visibility": "block" if section == BALANCES_SECTION else "hidden",
+            "SECTIONS": {
+                "EXPENSES": EXPENSES_SECTION,
+                "BALANCES": BALANCES_SECTION,
+            },
         },
-    })
+    )
 
 def login_view(request):
     if request.method == "POST":

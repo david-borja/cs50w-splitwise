@@ -17,3 +17,20 @@ def custom_submit_button(text):
         "text": text,
     }
 
+@register.inclusion_tag("splitwise_clone/components/balance-summary.html")
+def balance_summary(icon, amount_str, summary_details):
+    return {
+        "icon": icon,
+        "amount_str": amount_str,
+        "summary_details": summary_details,
+    }
+
+
+@register.inclusion_tag("splitwise_clone/components/balance-feed-item.html")
+def balance_feed_item(char, username, balance, is_it_me):
+    return {
+        "char": char,
+        "username": username,
+        "balance": balance,
+        "is_it_me": is_it_me,
+    }

@@ -1,25 +1,52 @@
-{% extends "splitwise_clone/layout.html" %}
-{% block body %}
+{% extends "splitwise_clone/layout.html" %} {% load custom_tags %} {% block body %}
 <div class="mt-8 text-center">
-  <span>{{ group.icon }}</span>
-  <h1 class="text-white">{{ group.name }}</h1>
+  <span class="text-4xl">{{ group.icon }}</span>
+  <h1 class="mt-2 text-2xl text-white">{{ group.name }}</h1>
 </div>
-<div class="flex p-1 mt-2 text-center text-white bg-gray-800 rounded-lg">
+<div class="flex p-1 mt-4 mb-6 text-center text-white bg-gray-800 rounded-lg">
   {% if section == SECTIONS.BALANCES %}
-    <button id="expenses-button" data-section="expenses" class="w-1/2">
-      Expenses
-    </button>
-    <button id="balances-button" data-section="balances" class="w-1/2 selected">
-      <div class="bg-gray-600 rounded-md">Balances</div>
-    </button>
+  <button id="expenses-button" data-section="expenses" class="w-1/2">
+    Expenses
+  </button>
+  <button id="balances-button" data-section="balances" class="w-1/2 selected">
+    <div class="bg-gray-600 rounded-md">Balances</div>
+  </button>
   {% else %}
-    <button id="expenses-button" data-section="expenses" class="w-1/2 selected">
-      <div class="bg-gray-600 rounded-md">Expenses</div>
-    </button>
-    <button id="balances-button" data-section="balances" class="w-1/2">Balances</button>
+  <button id="expenses-button" data-section="expenses" class="w-1/2 selected">
+    <div class="bg-gray-600 rounded-md">Expenses</div>
+  </button>
+  <button id="balances-button" data-section="balances" class="w-1/2">
+    Balances
+  </button>
   {% endif %}
 </div>
+<section>
+    <main id="expenses-section" class="{{ expenses_visibility }}"></main>
+    <main id="balances-section" class="{{ balances_visibility }}">
+      {% balance_summary "🤑" "You are owed 4,57 €" "See how Antonio and Aragó need to pay you back" %}
+      <article
+        class="w-full p-3 mx-auto mb-2 text-sm text-center text-blue-500 bg-gray-800 rounded-lg shadow"
+      >
+        View All Suggested Reimbursements
+      </article>
+      <section id="balance-feed" class="mt-6">
+        <h3 class="text-white">Balances</h3>
+        <ul class="mt-2 text-white">
+          {% balance_feed_item "A" "Antonio" "-1,93 €" False %}
+          {% balance_feed_item "A" "Aragó" "-9,14 €" False %}
+          {% balance_feed_item "B" "Borja" "+4,57 €" True %}
+        </ul>
+      </section>
+    </main>
+</section>
 <script>
+  const loadSection = (section) => {
+    const $sectionContent = document.createElement('div')
+    $sectionContent.classList.add('text-white')
+    $sectionContent.innerText = section
+    $('section').appendChild($sectionContent)
+  }
+
   const $ = (selector) => document.querySelector(selector)
   const serverSection = '{{ section }}'
 
@@ -31,18 +58,27 @@
     history.replaceState({ section: serverSection}, "", window.location.href)
   }
 
-  document.querySelectorAll('button').forEach(button => {
-    button.onclick = function() {
+  document.querySelectorAll('button').forEach((button) => {
+    button.onclick = function () {
       const section = history.state.section
       const { section: sectionClicked } = this.dataset
       if (sectionClicked !== section) {
-        const buttonToBlur = section
-        $(`#${buttonToBlur}-button`).children[0].remove()
-        $(`#${buttonToBlur}-button`).innerText = buttonToBlur
-        $(`#${buttonToBlur}-button`).classList.add('capitalize')
-        $(`#${buttonToBlur}-button`).classList.remove('selected')
+        $(`#${section}-button`).children[0].remove()
+        $(`#${section}-button`).innerText = section
+        $(`#${section}-button`).classList.add('capitalize')
+        $(`#${section}-button`).classList.remove('selected')
+        $(`#${section}-section`).classList.remove('block')
+        $(`#${section}-section`).classList.add('hidden')
+
         $(`#${sectionClicked}-button`).classList.add('selected')
-        $(`#${sectionClicked}-button`).innerHTML = `<div class="capitalize bg-gray-600 rounded-md">${sectionClicked}</div>`
+        $(`#${sectionClicked}-button`).innerHTML = `
+          <div class="capitalize bg-gray-600 rounded-md">
+            ${sectionClicked}
+          </div>
+        `
+        $(`#${sectionClicked}-section`).classList.remove('hidden')
+        $(`#${sectionClicked}-section`).classList.add('block')
+
         const basePath = window.location.pathname.split('/').slice(0, -1).join('/')
         history.pushState({ section: sectionClicked }, "", `${basePath}/${sectionClicked}`)
       }
