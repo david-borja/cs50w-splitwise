@@ -1,0 +1,15 @@
+<li>
+  <h3 class="text-white">{{ date }}</h3>
+  <article
+    class="flex justify-between w-full px-4 py-2 mx-auto mt-2 mb-2 text-white bg-gray-800 rounded-lg shadow"
+  >
+    <div class="flex gap-3">
+      <div class="grid text-3xl place-content-center">{{ icon }}</div>
+      <div>
+        <h5 class="grid place-content-center">{{ transaction_type }}</h5>
+        <p class="text-xs text-gray-300">{{ description }}<strong>{{ author }}</strong></p>
+      </div>
+    </div>
+    <span class="grid place-content-center">{{ amount }}</span>
+  </article>
+</li>

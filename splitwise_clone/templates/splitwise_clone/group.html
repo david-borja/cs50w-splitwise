@@ -21,7 +21,24 @@
   {% endif %}
 </div>
 <main>
-    <section id="expenses-section" class="{{ expenses_visibility }}"></section>
+    <section id="expenses-section" class="{{ expenses_visibility }}">
+      <div class="flex justify-between text-sm text-center text-gray-300">
+        <article class="px-12">
+          My Expenses
+          <span class="text-lg text-white">71,05 €</span>
+        </article>
+        <article class="px-12">
+          Total Expenses
+          <span class="text-lg text-white">928,72 €</span>
+        </article>
+      </div>
+      <section id="expenses-feed" class="pb-6 mt-6">
+        <ol class="flex flex-col gap-4">
+          {% expenses_feed_item "30. Sep 2024" "💳" "Reimbursement" "Transfered by " "Aragó" "12,81 €" %}
+          {% expenses_feed_item "22. Sep 2024" "💳" "Reimbursement" "Transfered by " "Pau" "20,69 €" %}
+        </ol>
+      </section>
+    </section>
     <section id="balances-section" class="{{ balances_visibility }}">
       {% balance_summary "🤑" "You are owed 4,57 €" "See how Antonio and Aragó need to pay you back" %}
       <article
@@ -29,25 +46,20 @@
       >
         View All Suggested Reimbursements
       </article>
-      <section id="balance-feed" class="mt-6">
+      <section id="balances-feed" class="mt-6">
         <h3 class="text-white">Balances</h3>
         <ul class="mt-2 text-white">
-          {% balance_feed_item "A" "Antonio" "-1,93 €" False %}
-          {% balance_feed_item "A" "Aragó" "-9,14 €" False %}
-          {% balance_feed_item "B" "Borja" "+4,57 €" True %}
+          {% balances_feed_item "A" "Antonio" "-1,93 €" False %}
+          {% balances_feed_item "A" "Aragó" "-9,14 €" False %}
+          {% balances_feed_item "B" "Borja" "+4,57 €" True %}
         </ul>
       </section>
     </section>
+    {% footer_create_button "add-expense-button" expenses_visibility "create_group" "Add Expense" %}
 </main>
 <script>
-  const loadSection = (section) => {
-    const $sectionContent = document.createElement('div')
-    $sectionContent.classList.add('text-white')
-    $sectionContent.innerText = section
-    $('section').appendChild($sectionContent)
-  }
-
   const $ = (selector) => document.querySelector(selector)
+  const EXPENSES = 'expenses'
   const serverSection = '{{ section }}'
 
   // if visited url is /, sync url section with server section
@@ -67,6 +79,7 @@
         $(`#${section}-button`).innerText = section
         $(`#${section}-button`).classList.add('capitalize')
         $(`#${section}-button`).classList.remove('selected')
+
         $(`#${section}-section`).classList.remove('block')
         $(`#${section}-section`).classList.add('hidden')
 
@@ -78,6 +91,9 @@
         `
         $(`#${sectionClicked}-section`).classList.remove('hidden')
         $(`#${sectionClicked}-section`).classList.add('block')
+
+        $(`#add-expense-button`).classList.remove(sectionClicked === EXPENSES ? 'hidden' : 'block')
+        $(`#add-expense-button`).classList.add(sectionClicked === EXPENSES ? 'block' : 'hidden')
 
         const basePath = window.location.pathname.split('/').slice(0, -1).join('/')
         history.pushState({ section: sectionClicked }, "", `${basePath}/${sectionClicked}`)
