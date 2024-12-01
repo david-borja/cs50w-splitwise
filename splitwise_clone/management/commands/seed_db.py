@@ -57,16 +57,24 @@ def insert_users(self, data):
 
 def insert_aliases(self, data):
     try:
-        for item in data:
-            alias = item["alias"],
-            group = UserGroup.objects.get(name=item["group"])
-            UserAlias(
-                alias=alias,
-                group=group
-            )
+        USERNAME = 'david'
+        user = User.objects.get_by_natural_key(USERNAME)
+        group_names = list(data.keys())
+        for group_name in group_names:
+            group = UserGroup.objects.get(name=group_name)
+            participants = data[group_name]
+            me_as_participant = participants[0]
+            UserAlias.objects.create(user=user, alias=me_as_participant, group=group)
             self.stdout.write(
-                self.style.SUCCESS(f"Created alias '{item['alias']}'")
+                self.style.SUCCESS(f"Created alias '{me_as_participant}'")
             )
+
+            rest_of_participants = participants[1:]
+            for participant in rest_of_participants:
+                UserAlias.objects.create(alias=participant, group=group)
+                self.stdout.write(
+                    self.style.SUCCESS(f"Created alias '{participant}'")
+                )
         self.stdout.write(self.style.SUCCESS("ALIAS seeding completed."))
     except Exception as err:
         self.stdout.write(self.style.ERROR("An error occurred:", err))

@@ -1,34 +1,13 @@
-[
-  {
-    "alias": "David",
-    "group": "Nadals"
-  },
-  {
-    "alias": "Maria",
-    "group": "Nadals"
-  },
-  {
-    "alias": "Lina",
-    "group": "Nadals"
-  },
-  {
-    "alias": "Manolo",
-    "group": "Nadals"
-  },
-  {
-    "alias": "Manuela",
-    "group": "Piso Vlc"
-  },
-  {
-    "alias": "Alexa",
-    "group": "Piso Vlc"
-  },
-  {
-    "alias": "Rita",
-    "group": "Piso Vlc"
-  },
-  {
-    "alias": "Deivid",
-    "group": "Piso Vlc"
-  }
-]
+{
+  "Piso Vlc": ["Deivid", "Manuela", "Alexa", "Rita"],
+  "Nadals": ["David", "Maria", "Lina", "Manolo"],
+  "Tennis Club Valencia": ["David Borja", "Gabriel", "Pep", "Mark"],
+  "Rafa's bday": [
+    "Borja",
+    "Marc",
+    "Antonio",
+    "Oscar",
+    "Raul",
+    "Pau"
+  ]
+}

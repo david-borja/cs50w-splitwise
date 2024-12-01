@@ -8,5 +8,15 @@
       "name": "Nadals",
       "description": "Regalos de familia",
       "icon": "🎄"
+  },
+  {
+      "name": "Tennis Club Valencia",
+      "description": "Gastos de torneo",
+      "icon": "🎾"
+  },
+  {
+      "name": "Rafa's bday",
+      "description": "Regalos de cumpleaños y fiesta",
+      "icon": "🎂"
   }
 ]
