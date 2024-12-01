@@ -1,0 +1,362 @@
+[
+  {
+    "name": "Groceries",
+    "amount": 43.21,
+    "payer": "Deivid",
+    "splitters": ["Deivid", "Manuela", "Alexa", "Rita"],
+    "currency": "EUR",
+    "timestamp": "2024-11-03T12:30:45Z",
+    "emoji": "🛒",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Electricity Bill",
+    "amount": 78.45,
+    "payer": "Manuela",
+    "splitters": ["Deivid", "Manuela", "Rita"],
+    "currency": "EUR",
+    "timestamp": "2024-11-07T15:12:30Z",
+    "emoji": "💡",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Dinner Out",
+    "amount": 50.89,
+    "payer": "Alexa",
+    "splitters": ["Deivid", "Alexa"],
+    "currency": "EUR",
+    "timestamp": "2024-11-10T18:45:20Z",
+    "emoji": "🍽️",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Cleaning Supplies",
+    "amount": 29.32,
+    "payer": "Rita",
+    "splitters": ["Rita", "Deivid", "Alexa"],
+    "currency": "EUR",
+    "timestamp": "2024-11-12T09:15:10Z",
+    "emoji": "🧹",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Groceries",
+    "amount": 42.17,
+    "payer": "David",
+    "splitters": ["David", "Maria", "Lina"],
+    "currency": "EUR",
+    "timestamp": "2024-11-03T17:25:45Z",
+    "emoji": "🛒",
+    "group": "Christmas"
+  },
+  {
+    "name": "Cable Subscription",
+    "amount": 85.1,
+    "payer": "Maria",
+    "splitters": ["David", "Maria", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-06T21:10:33Z",
+    "emoji": "📺",
+    "group": "Christmas"
+  },
+  {
+    "name": "Monthly Groceries",
+    "amount": 60.44,
+    "payer": "Lina",
+    "splitters": ["David", "Maria", "Lina", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-12T10:40:55Z",
+    "emoji": "🛒",
+    "group": "Christmas"
+  },
+  {
+    "name": "Gas Bill",
+    "amount": 45.2,
+    "payer": "Manolo",
+    "splitters": ["Maria", "Lina", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-15T13:12:50Z",
+    "emoji": "🔥",
+    "group": "Christmas"
+  },
+  {
+    "name": "Tennis Gear",
+    "amount": 92.33,
+    "payer": "David Borja",
+    "splitters": ["David Borja", "Gabriel", "Mark"],
+    "currency": "EUR",
+    "timestamp": "2024-11-05T14:20:30Z",
+    "emoji": "🎾",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Court Booking",
+    "amount": 33.89,
+    "payer": "Gabriel",
+    "splitters": ["David Borja", "Gabriel", "Pep", "Mark"],
+    "currency": "EUR",
+    "timestamp": "2024-11-08T11:45:05Z",
+    "emoji": "🏟️",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Snacks",
+    "amount": 14.55,
+    "payer": "Pep",
+    "splitters": ["David Borja", "Pep"],
+    "currency": "EUR",
+    "timestamp": "2024-11-12T17:30:25Z",
+    "emoji": "🍿",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Tennis Balls",
+    "amount": 25.78,
+    "payer": "Mark",
+    "splitters": ["Pep", "Mark"],
+    "currency": "EUR",
+    "timestamp": "2024-11-15T19:40:12Z",
+    "emoji": "🎾",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Party Decorations",
+    "amount": 80.99,
+    "payer": "Borja",
+    "splitters": ["Borja", "Marc", "Antonio"],
+    "currency": "EUR",
+    "timestamp": "2024-11-02T10:15:30Z",
+    "emoji": "🎉",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Drinks",
+    "amount": 52.1,
+    "payer": "Marc",
+    "splitters": ["Borja", "Marc", "Oscar"],
+    "currency": "EUR",
+    "timestamp": "2024-11-04T22:30:50Z",
+    "emoji": "🍹",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Snacks",
+    "amount": 35.25,
+    "payer": "Antonio",
+    "splitters": ["Antonio", "Oscar", "Raul"],
+    "currency": "EUR",
+    "timestamp": "2024-11-06T08:40:20Z",
+    "emoji": "🍿",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Gift",
+    "amount": 75.3,
+    "payer": "Oscar",
+    "splitters": ["Marc", "Antonio", "Oscar", "Raul", "Pau"],
+    "currency": "EUR",
+    "timestamp": "2024-11-09T15:50:10Z",
+    "emoji": "🎁",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Surprise Cake",
+    "amount": 99.4,
+    "payer": "Raul",
+    "splitters": ["Borja", "Marc", "Antonio", "Raul"],
+    "currency": "EUR",
+    "timestamp": "2024-11-15T20:12:15Z",
+    "emoji": "🎂",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Party Supplies",
+    "amount": 66.78,
+    "payer": "Pau",
+    "splitters": ["Oscar", "Raul", "Pau"],
+    "currency": "EUR",
+    "timestamp": "2024-11-18T11:05:00Z",
+    "emoji": "🎈",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Netflix Subscription",
+    "amount": 12.34,
+    "payer": "Deivid",
+    "splitters": ["Deivid", "Alexa"],
+    "currency": "EUR",
+    "timestamp": "2024-11-04T13:25:40Z",
+    "emoji": "🎥",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Pizza Night",
+    "amount": 48.76,
+    "payer": "Manuela",
+    "splitters": ["Deivid", "Manuela", "Rita"],
+    "currency": "EUR",
+    "timestamp": "2024-11-07T20:15:10Z",
+    "emoji": "🍕",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Wine Tasting",
+    "amount": 60.22,
+    "payer": "Alexa",
+    "splitters": ["Deivid", "Manuela", "Alexa"],
+    "currency": "EUR",
+    "timestamp": "2024-11-11T14:40:05Z",
+    "emoji": "🍷",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Internet Bill",
+    "amount": 30.0,
+    "payer": "Rita",
+    "splitters": ["Rita", "Manuela", "Alexa"],
+    "currency": "EUR",
+    "timestamp": "2024-11-14T09:05:45Z",
+    "emoji": "🌐",
+    "group": "Vlc Apartment"
+  },
+  {
+    "name": "Birthday Cake",
+    "amount": 40.89,
+    "payer": "David",
+    "splitters": ["David", "Maria", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-05T18:45:20Z",
+    "emoji": "🎂",
+    "group": "Christmas"
+  },
+  {
+    "name": "Road Trip",
+    "amount": 85.3,
+    "payer": "Maria",
+    "splitters": ["David", "Maria", "Lina"],
+    "currency": "EUR",
+    "timestamp": "2024-11-10T21:10:30Z",
+    "emoji": "🚗",
+    "group": "Christmas"
+  },
+  {
+    "name": "Breakfast Out",
+    "amount": 22.1,
+    "payer": "Lina",
+    "splitters": ["Lina", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-14T10:15:00Z",
+    "emoji": "☕",
+    "group": "Christmas"
+  },
+  {
+    "name": "Parking Fee",
+    "amount": 18.75,
+    "payer": "Manolo",
+    "splitters": ["David", "Manolo"],
+    "currency": "EUR",
+    "timestamp": "2024-11-16T13:30:20Z",
+    "emoji": "🅿️",
+    "group": "Christmas"
+  },
+  {
+    "name": "Tennis Rackets",
+    "amount": 95.8,
+    "payer": "David Borja",
+    "splitters": ["David Borja", "Pep"],
+    "currency": "EUR",
+    "timestamp": "2024-11-04T12:30:10Z",
+    "emoji": "🎾",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Gym Membership",
+    "amount": 55.45,
+    "payer": "Gabriel",
+    "splitters": ["Gabriel", "Mark"],
+    "currency": "EUR",
+    "timestamp": "2024-11-09T15:20:35Z",
+    "emoji": "🏋️",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Coffee Machine",
+    "amount": 75.33,
+    "payer": "Pep",
+    "splitters": ["David Borja", "Pep", "Gabriel"],
+    "currency": "EUR",
+    "timestamp": "2024-11-11T18:00:25Z",
+    "emoji": "☕",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Tournament Fee",
+    "amount": 45.12,
+    "payer": "Mark",
+    "splitters": ["Pep", "Gabriel", "Mark"],
+    "currency": "EUR",
+    "timestamp": "2024-11-13T17:40:45Z",
+    "emoji": "🏆",
+    "group": "Tennis Club Valencia"
+  },
+  {
+    "name": "Music Band Hire",
+    "amount": 88.99,
+    "payer": "Borja",
+    "splitters": ["Borja", "Marc", "Antonio", "Oscar"],
+    "currency": "EUR",
+    "timestamp": "2024-11-01T20:05:20Z",
+    "emoji": "🎸",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Birthday Invitations",
+    "amount": 39.4,
+    "payer": "Marc",
+    "splitters": ["Marc", "Pau"],
+    "currency": "EUR",
+    "timestamp": "2024-11-06T11:45:00Z",
+    "emoji": "✉️",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Gift Wrapping",
+    "amount": 20.15,
+    "payer": "Antonio",
+    "splitters": ["Antonio", "Raul"],
+    "currency": "EUR",
+    "timestamp": "2024-11-08T19:30:15Z",
+    "emoji": "🎀",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Surprise Party Rentals",
+    "amount": 99.0,
+    "payer": "Oscar",
+    "splitters": ["Oscar", "Marc", "Antonio", "Raul"],
+    "currency": "EUR",
+    "timestamp": "2024-11-12T14:40:50Z",
+    "emoji": "🎈",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Special Cake",
+    "amount": 65.2,
+    "payer": "Raul",
+    "splitters": ["Raul", "Pau", "Marc"],
+    "currency": "EUR",
+    "timestamp": "2024-11-17T22:10:45Z",
+    "emoji": "🎂",
+    "group": "Rafa's bday"
+  },
+  {
+    "name": "Outdoor Decorations",
+    "amount": 78.88,
+    "payer": "Pau",
+    "splitters": ["Pau", "Oscar", "Raul"],
+    "currency": "EUR",
+    "timestamp": "2024-11-19T09:05:00Z",
+    "emoji": "🏞️",
+    "group": "Rafa's bday"
+  }
+]

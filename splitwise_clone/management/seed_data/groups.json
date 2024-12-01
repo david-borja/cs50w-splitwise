@@ -1,22 +1,22 @@
 [
   {
-      "name": "Piso Vlc",
-      "description": "Gastos del piso",
+      "name": "Vlc Apartment",
+      "description": "Apartment expenses",
       "icon": "🏠"
   },
   {
-      "name": "Nadals",
-      "description": "Regalos de familia",
+      "name": "Christmas",
+      "description": "Family expenses for Xmas",
       "icon": "🎄"
   },
   {
       "name": "Tennis Club Valencia",
-      "description": "Gastos de torneo",
+      "description": "Daily club expenses",
       "icon": "🎾"
   },
   {
       "name": "Rafa's bday",
-      "description": "Regalos de cumpleaños y fiesta",
+      "description": "Bday and party expenses",
       "icon": "🎂"
   }
 ]

@@ -53,6 +53,9 @@ def group(request, group_id, section=DEFAULT_SECTION):
     for participant in participants:
         participant.initial_letter = participant.alias[0].upper()
         participant.is_current_user = participant.user == request.user
+
+    expenses = group.group_expenses.order_by('-timestamp')
+
     return render(
         request,
         "splitwise_clone/group.html",
@@ -65,7 +68,8 @@ def group(request, group_id, section=DEFAULT_SECTION):
                 "EXPENSES": EXPENSES_SECTION,
                 "BALANCES": BALANCES_SECTION,
             },
-            "participants": participants
+            "participants": participants,
+            "expenses": expenses,
         },
     )
 

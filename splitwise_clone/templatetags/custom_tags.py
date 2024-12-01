@@ -53,13 +53,13 @@ def balances_feed_item(char, username, balance, is_it_me):
     }
 
 @register.inclusion_tag("splitwise_clone/components/expenses-feed-item.html")
-def expenses_feed_item(date, icon, transaction_type, description, author, amount):
+def expenses_feed_item(date, icon, name, description, payer, amount):
     return {
         "date": date,
         "icon": icon,
-        "transaction_type": transaction_type,
+        "name": name,
         "description": description,
-        "author": author,
+        "payer": payer,
         "amount": amount,
     }
 

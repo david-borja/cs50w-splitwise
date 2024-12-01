@@ -40,8 +40,9 @@
       </div>
       <section id="expenses-feed" class="pb-6 mt-6">
         <ol class="flex flex-col gap-4">
-          {% expenses_feed_item "30. Sep 2024" "💳" "Reimbursement" "Transfered by " "Aragó" "12,81 €" %}
-          {% expenses_feed_item "22. Sep 2024" "💳" "Reimbursement" "Transfered by " "Pau" "20,69 €" %}
+          {% for expense in expenses %}
+            {% expenses_feed_item expense.timestamp expense.icon expense.name "Paid by " expense.payer.alias expense.amount %}
+          {% endfor %}
         </ol>
       </section>
     </section>

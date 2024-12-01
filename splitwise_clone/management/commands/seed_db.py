@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from splitwise_clone.models import User, UserGroup, UserAlias
+from django.db import transaction
+from splitwise_clone.models import User, UserGroup, UserAlias, Expense
 import json
 import os
 
@@ -75,15 +76,41 @@ def insert_aliases(self, data):
                 self.stdout.write(
                     self.style.SUCCESS(f"Created alias '{participant}'")
                 )
-        self.stdout.write(self.style.SUCCESS("ALIAS seeding completed."))
+        self.stdout.write(self.style.SUCCESS("ALIASES seeding completed."))
     except Exception as err:
         self.stdout.write(self.style.ERROR("An error occurred:", err))
 
+
+def insert_expenses(self, data):
+    try:
+        with transaction.atomic(): 
+            for item in data:
+                expense = Expense(
+                    name=item["name"],
+                    amount=item["amount"],
+                    group=UserGroup.objects.get(name=item["group"]),
+                    payer=UserAlias.objects.get(alias=item["payer"]),
+                    timestamp=item["timestamp"],
+                    icon=item["emoji"],
+                )
+                splitters = []
+                for splitter in item["splitters"]:
+                    alias = UserAlias.objects.get(alias=splitter)
+                    splitters.append(alias)
+                expense.splitters.set(splitters)
+                expense.save()
+                self.stdout.write(
+                    self.style.SUCCESS(f"Created expense '{item['name']}'")
+                )
+            self.stdout.write(self.style.SUCCESS("EXPENSES seeding completed."))
+    except Exception as err:
+        self.stdout.write(self.style.ERROR("An error occurred:", err))
 
 integrator_switch = {
     "users.json": insert_users,
     "groups.json": insert_groups,
     "aliases.json": insert_aliases,
+    "expenses.json": insert_expenses,
 }
 
 
@@ -95,7 +122,7 @@ class Command(BaseCommand):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         # Construct the path to the JSON file
         seed_data_dir = os.path.join(script_dir, "../seed_data")
-        data_file_names = ["users.json", "groups.json", "aliases.json"] # os.listdir(seed_data_dir)
+        data_file_names = ["users.json", "groups.json", "aliases.json", "expenses.json"] # os.listdir(seed_data_dir)
         for data_file_name in data_file_names:
             if data_file_name not in integrator_switch:
                 raise Exception(f"{data_file_name} file doesn't belong to seed data")
