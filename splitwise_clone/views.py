@@ -31,8 +31,12 @@ def create_group(request):
         group = UserGroup(name=group_name)
         group.save()
         created_group = UserGroup.objects.get(name=group_name)
+        me_as_participant = participants[0]
+        UserAlias.objects.create(user=request.user, alias=me_as_participant, group=created_group)
+
+        rest_of_participants = participants[1:]
         user_aliases = []
-        for participant in participants:
+        for participant in rest_of_participants:
             user_aliases.append(UserAlias(alias=participant, group=created_group))
         UserAlias.objects.bulk_create(user_aliases)
         return HttpResponseRedirect(reverse("index"))
@@ -45,6 +49,10 @@ def group(request, group_id, section=DEFAULT_SECTION):
         return HttpResponse("Invalid section", status=404)
 
     group = UserGroup.objects.get(pk=group_id)
+    participants = UserAlias.objects.filter(group=group_id).order_by('alias')
+    for participant in participants:
+        participant.initial_letter = participant.alias[0].upper()
+        participant.is_current_user = participant.user == request.user
     return render(
         request,
         "splitwise_clone/group.html",
@@ -57,6 +65,7 @@ def group(request, group_id, section=DEFAULT_SECTION):
                 "EXPENSES": EXPENSES_SECTION,
                 "BALANCES": BALANCES_SECTION,
             },
+            "participants": participants
         },
     )
 

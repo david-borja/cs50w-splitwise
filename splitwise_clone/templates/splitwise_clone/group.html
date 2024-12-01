@@ -1,5 +1,11 @@
 {% extends "splitwise_clone/layout.html" %} {% load custom_tags %} {% block body %}
-<div class="mt-8 text-center">
+<header class="mt-4">
+  <a href="{% url 'index' %}" class="flex hover:cursor-pointer">
+    {% svg_icon 'left-arrow' %}
+    <span class="grid text-xl text-white place-content-center">Groups</span>
+  </a>
+</header>
+<div class="mt-5 text-center">
   <span class="text-4xl">{{ group.icon }}</span>
   <h1 class="mt-2 text-2xl text-white">{{ group.name }}</h1>
 </div>
@@ -49,9 +55,9 @@
       <section id="balances-feed" class="mt-6">
         <h3 class="text-white">Balances</h3>
         <ul class="mt-2 text-white">
-          {% balances_feed_item "A" "Antonio" "-1,93 €" False %}
-          {% balances_feed_item "A" "Aragó" "-9,14 €" False %}
-          {% balances_feed_item "B" "Borja" "+4,57 €" True %}
+          {% for participant in participants %}
+            {% balances_feed_item participant.initial_letter participant.alias "-1,93 €" participant.is_current_user %}
+          {% endfor %}
         </ul>
       </section>
     </section>
