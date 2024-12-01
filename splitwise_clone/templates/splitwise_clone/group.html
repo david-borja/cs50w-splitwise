@@ -20,9 +20,9 @@
   </button>
   {% endif %}
 </div>
-<section>
-    <main id="expenses-section" class="{{ expenses_visibility }}"></main>
-    <main id="balances-section" class="{{ balances_visibility }}">
+<main>
+    <section id="expenses-section" class="{{ expenses_visibility }}"></section>
+    <section id="balances-section" class="{{ balances_visibility }}">
       {% balance_summary "🤑" "You are owed 4,57 €" "See how Antonio and Aragó need to pay you back" %}
       <article
         class="w-full p-3 mx-auto mb-2 text-sm text-center text-blue-500 bg-gray-800 rounded-lg shadow"
@@ -37,8 +37,8 @@
           {% balance_feed_item "B" "Borja" "+4,57 €" True %}
         </ul>
       </section>
-    </main>
-</section>
+    </section>
+</main>
 <script>
   const loadSection = (section) => {
     const $sectionContent = document.createElement('div')
