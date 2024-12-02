@@ -35,10 +35,9 @@ def custom_submit_button(text):
     }
 
 @register.inclusion_tag("splitwise_clone/components/balance-summary.html")
-def balance_summary(icon, amount_str, summary_details):
+def balance_summary(amount, summary_details):
     return {
-        "icon": icon,
-        "amount_str": amount_str,
+        "amount": amount,
         "summary_details": summary_details,
     }
 
@@ -72,3 +71,11 @@ def footer_create_button(id, visibility, form_url, text):
         "form_url": form_url,
         "text": text,
     }
+
+
+@register.filter
+def abs_value(value):
+    try:
+        return abs(value)
+    except (TypeError, ValueError):
+        return value

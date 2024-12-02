@@ -66,8 +66,11 @@ def group(request, group_id, section=DEFAULT_SECTION):
 
     balances = get_balances(expenses, group_aliases)
 
+    balance_summary_amount = 0
     for participant in participants:
         participant.balance = balances[participant.alias]
+        if participant.is_current_user:
+            balance_summary_amount = participant.balance
 
     return render(
         request,
@@ -88,6 +91,7 @@ def group(request, group_id, section=DEFAULT_SECTION):
                 "my_expenses": my_expenses_amount,
                 "total_expenses": total_expenses_amount,
             },
+            "balance_summary": { "amount": balance_summary_amount }
         },
     )
 

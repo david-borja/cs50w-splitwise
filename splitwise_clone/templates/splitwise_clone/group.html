@@ -31,11 +31,11 @@
       <div class="flex justify-between text-sm text-center text-gray-300">
         <article class="px-12">
           My Expenses
-          <span class="text-lg text-white">{{ expenses_summary.my_expenses }}</span>
+          <span class="text-lg text-white">{{ expenses_summary.my_expenses }} €</span>
         </article>
         <article class="px-12">
           Total Expenses
-          <span class="text-lg text-white">{{ expenses_summary.total_expenses }}</span>
+          <span class="text-lg text-white">{{ expenses_summary.total_expenses }} €</span>
         </article>
       </div>
       <section id="expenses-feed" class="pb-6 mt-6">
@@ -47,13 +47,13 @@
       </section>
     </section>
     <section id="balances-section" class="{{ balances_visibility }}">
-      {% balance_summary "🤑" "You are owed 4,57 €" "See how Antonio and Aragó need to pay you back" %}
+      {% balance_summary balance_summary.amount "See how Antonio and Aragó need to pay you back" %}
       <article
         class="w-full p-3 mx-auto mb-2 text-sm text-center text-blue-500 bg-gray-800 rounded-lg shadow"
       >
         View All Suggested Reimbursements
       </article>
-      <section id="balances-feed" class="mt-6">
+      <section id="balances-feed" class="pb-6 mt-6">
         <h3 class="text-white">Balances</h3>
         <ul class="mt-2 text-white">
           {% for participant in participants %}
