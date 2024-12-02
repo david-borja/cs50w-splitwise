@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
+from .utils import compute_expenses, get_balances
 from .models import User, UserGroup, UserAlias
 
 EXPENSES_SECTION = "expenses"
@@ -50,11 +51,23 @@ def group(request, group_id, section=DEFAULT_SECTION):
 
     group = UserGroup.objects.get(pk=group_id)
     participants = UserAlias.objects.filter(group=group_id).order_by('alias')
+
+    group_aliases = []
     for participant in participants:
         participant.initial_letter = participant.alias[0].upper()
         participant.is_current_user = participant.user == request.user
+        group_aliases.append(participant.alias)
 
     expenses = group.group_expenses.order_by('-timestamp')
+    total_expenses_amount = compute_expenses(expenses)
+
+    my_expenses = UserAlias.objects.get(user=request.user, group=group).acquisitions.all()
+    my_expenses_amount = compute_expenses(my_expenses)
+
+    balances = get_balances(expenses, group_aliases)
+
+    for participant in participants:
+        participant.balance = balances[participant.alias]
 
     return render(
         request,
@@ -70,6 +83,11 @@ def group(request, group_id, section=DEFAULT_SECTION):
             },
             "participants": participants,
             "expenses": expenses,
+            "expenses_summary":
+            {
+                "my_expenses": my_expenses_amount,
+                "total_expenses": total_expenses_amount,
+            },
         },
     )
 

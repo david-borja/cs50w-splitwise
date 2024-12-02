@@ -29,7 +29,7 @@ class Expense(models.Model):
     group = models.ForeignKey(
         UserGroup, blank=True, null=True, on_delete=models.CASCADE, related_name="group_expenses"
     )
-    amount = models.FloatField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     payer = models.ForeignKey(
         UserAlias,
         blank=False,
