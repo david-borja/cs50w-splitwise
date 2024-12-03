@@ -22,13 +22,14 @@
     Participants
   </label>
   <section class="mb-6">
-    <div id="participants-list">
+    <div id="participants-list" class="relative">
+      <span class="absolute grid h-auto px-2 py-1 text-xs text-white bg-blue-600 rounded-md right-3 place-content-center top-2">Me</span>
       <input
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-t-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
         name="participant-1"
         type="text"
         required
-        value="{{ request.user }}"
+        value="{{ request.user|capfirst }}"
       />
       <input
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
