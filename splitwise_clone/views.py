@@ -4,7 +4,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.db import IntegrityError
 from django.shortcuts import render
 from django.urls import reverse
-from .utils import compute_expenses, get_balances
+from .utils import (
+    compute_expenses,
+    get_balances,
+    get_suggested_reimbursements,
+    flatten_reimbursements,
+    filter_reimbursements_by_person,
+    filter_reimbursements_exclude_person,
+)
 from .models import User, UserGroup, UserAlias
 
 EXPENSES_SECTION = "expenses"
@@ -67,10 +74,21 @@ def group(request, group_id, section=DEFAULT_SECTION):
     balances = get_balances(expenses, group_aliases)
 
     balance_summary_amount = 0
+    current_user_alias = ''
     for participant in participants:
         participant.balance = balances[participant.alias]
         if participant.is_current_user:
             balance_summary_amount = participant.balance
+            current_user_alias = participant.alias
+
+    suggested_reimbursements = get_suggested_reimbursements(balances)
+    flat_reimbursements = flatten_reimbursements(suggested_reimbursements)
+    my_reimbursements = filter_reimbursements_by_person(
+        flat_reimbursements, current_user_alias
+    )
+    other_reimbursements = filter_reimbursements_exclude_person(
+        flat_reimbursements, current_user_alias
+    )
 
     return render(
         request,
@@ -85,13 +103,15 @@ def group(request, group_id, section=DEFAULT_SECTION):
                 "BALANCES": BALANCES_SECTION,
             },
             "participants": participants,
+            "current_user_alias": current_user_alias,
             "expenses": expenses,
-            "expenses_summary":
-            {
+            "expenses_summary": {
                 "my_expenses": my_expenses_amount,
                 "total_expenses": total_expenses_amount,
             },
-            "balance_summary": { "amount": balance_summary_amount }
+            "balance_summary": {"amount": balance_summary_amount},
+            "my_reimbursements": my_reimbursements,
+            "suggested_reimbursements": other_reimbursements,
         },
     )
 

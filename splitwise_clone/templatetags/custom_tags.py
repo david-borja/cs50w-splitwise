@@ -73,6 +73,18 @@ def footer_create_button(id, visibility, form_url, text):
     }
 
 
+@register.inclusion_tag("splitwise_clone/components/reimbursements-modal.html")
+def reimbursements_modal(modal_id, close_modal_button_id, balance_summary, my_reimbursements, suggested_reimbursements, user_alias):
+    return {
+        "modal_id": modal_id,
+        "close_modal_button_id": close_modal_button_id,
+        "balance_summary": balance_summary,
+        "my_reimbursements": my_reimbursements,
+        "suggested_reimbursements": suggested_reimbursements,
+        "user_alias": user_alias,
+    }
+
+
 @register.filter
 def abs_value(value):
     try:
