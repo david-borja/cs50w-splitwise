@@ -85,6 +85,17 @@ def reimbursements_modal(modal_id, close_modal_button_id, balance_summary, my_re
     }
 
 
+@register.inclusion_tag("splitwise_clone/components/dropdown.html")
+def dropdown(input_name, label, button_id, dropdown_id, options, default_value):
+    return {
+        "input_name": input_name,
+        "label": label,
+        "button_id": button_id,
+        "dropdown_id": dropdown_id,
+        "options": options,
+        "default_value": default_value
+    }
+
 @register.filter
 def abs_value(value):
     try:

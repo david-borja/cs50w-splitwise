@@ -9,6 +9,7 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register_view, name="register"),
     path("create-group", views.create_group, name="create_group"),
+    path("create-expense", views.create_expense, name="create_expense"),
     path("groups/<str:group_id>", views.group, name="group"),
     path("groups/<str:group_id>/<str:section>", views.group, name="group_section"),
     path("__reload__", include("django_browser_reload.urls")),

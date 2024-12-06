@@ -1,0 +1,65 @@
+<input type="hidden" name="participant" id="selectedParticipant" />
+{% extends "splitwise_clone/layout.html" %} {% load custom_tags %}
+{% block body %}
+<header class="mt-4">
+  <a href="{% url 'index' %}" class="flex hover:cursor-pointer">
+    {% svg_icon 'left-arrow' %}
+    <span class="grid text-xl text-white place-content-center">Groups</span>
+  </a>
+</header>
+<form
+  id="create-group-form"
+  action="{% url 'create_group' %}"
+  method="post"
+  class="max-w-md mx-auto my-6"
+>
+  {% csrf_token %}
+  <div class="mb-6">
+    {% custom_input 'group_name' 'text' 'City Trip' 'Title' %}
+  </div>
+  <div class="mb-6">
+    {% custom_input 'amount' 'number' '60' 'Amount' %}
+  </div>
+  {% dropdown 'payer' 'Paid By' 'participants-dropdown-button' 'participants-dropdown' participants current_user_as_participant %}
+</form>
+<script type="module">
+  const inlineDropdownSvg = `
+  <svg
+    class="w-2.5 h-2.5 ms-3"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 10 6"
+  >
+    <path
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="m1 1 4 4 4-4"
+    />
+  </svg>`
+  const $ = (selector) => document.querySelector(selector)
+  const $participantsDropdownButton = $('#participants-dropdown-button')
+  const $participantsDropdown = $('#participants-dropdown')
+  const $participantsDropdownInput = $('#participants-dropdown-input')
+
+  $participantsDropdownButton.onclick = (e) => {
+    $('#participants-dropdown').classList.toggle('hidden')
+  }
+
+  $participantsDropdownInput.value = '{{ current_user_as_participant.id }}'
+
+  document.querySelectorAll('.option').forEach((element => {
+    element.onclick = function() {
+      const { participant: participantId } = this.dataset
+      $participantsDropdownInput.value = participantId
+      $participantsDropdown.classList.toggle('hidden')
+      // make sure current user belongs to the group
+      $participantsDropdownButton.innerHTML = `${this.innerText}${inlineDropdownSvg}`
+    }
+  }))
+
+
+</script>
+{% endblock %}

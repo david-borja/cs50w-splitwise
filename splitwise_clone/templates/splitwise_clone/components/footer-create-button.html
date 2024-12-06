@@ -1,6 +1,6 @@
 {% load custom_tags %}
 <div id="{{ id }}" class="{{ visibility }} fixed transform -translate-x-1/2 bottom-[8%] left-1/2 w-fit">
-  <a class="block mx-auto w-fit" href="{% url form_url %}">
+  <a class="block mx-auto w-fit" href="{{ form_url }}">
     {% svg_icon 'add-symbol' %}
   </a>
   <span class="block mt-1 text-center text-gray-900 dark:text-white">

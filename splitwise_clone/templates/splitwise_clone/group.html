@@ -63,7 +63,7 @@
         </ul>
       </section>
     </section>
-    {% footer_create_button "add-expense-button" expenses_visibility "create_group" "Add Expense" %}
+    {% footer_create_button "add-expense-button" expenses_visibility create_expense_form_url "Add Expense" %}
     {% reimbursements_modal "my-reimbursements-modal" "close-my-reimbursements-button" balance_summary my_reimbursements None current_user_alias %}
     {% reimbursements_modal "suggested-reimbursements-modal" "close-suggested-reimbursements-button" balance_summary my_reimbursements suggested_reimbursements current_user_alias %}
 </main>

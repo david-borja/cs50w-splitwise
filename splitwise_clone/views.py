@@ -21,7 +21,11 @@ DEFAULT_SECTION = EXPENSES_SECTION
 @login_required()
 def index(request):
     groups = UserGroup.objects.all()
-    return render(request, "splitwise_clone/index.html", {"groups": groups})
+    create_group_form_url = reverse('create_group')
+    return render(request, "splitwise_clone/index.html", {
+        "groups": groups,
+        "create_group_form_url": create_group_form_url,
+    })
 
 
 @login_required()
@@ -50,6 +54,22 @@ def create_group(request):
         return HttpResponseRedirect(reverse("index"))
     return render(request, "splitwise_clone/create-group.html")
 
+
+@login_required()
+def create_expense(request):
+    group_id = request.GET.get('group_id')
+    participants = UserAlias.objects.filter(group=group_id).order_by('alias')
+
+    current_user_as_participant = None
+    for participant in participants:
+        participant.is_current_user = participant.user == request.user
+        if participant.is_current_user:
+            current_user_as_participant = participant
+
+    return render(request, "splitwise_clone/create-expense.html", {
+        "participants": participants,
+        "current_user_as_participant": current_user_as_participant,
+})
 
 @login_required()
 def group(request, group_id, section=DEFAULT_SECTION):
@@ -112,6 +132,7 @@ def group(request, group_id, section=DEFAULT_SECTION):
             "balance_summary": {"amount": balance_summary_amount},
             "my_reimbursements": my_reimbursements,
             "suggested_reimbursements": other_reimbursements,
+            "create_expense_form_url": f"{reverse('create_expense')}?group_id={group_id}",
         },
     )
 
