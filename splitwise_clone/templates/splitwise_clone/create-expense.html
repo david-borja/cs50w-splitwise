@@ -2,25 +2,53 @@
 {% extends "splitwise_clone/layout.html" %} {% load custom_tags %}
 {% block body %}
 <header class="mt-4">
-  <a href="{% url 'index' %}" class="flex hover:cursor-pointer">
+  <a href="{% url 'group' group_id %}" class="flex hover:cursor-pointer">
     {% svg_icon 'left-arrow' %}
-    <span class="grid text-xl text-white place-content-center">Groups</span>
+    <span class="grid text-xl text-white place-content-center">Expenses</span>
   </a>
 </header>
 <form
-  id="create-group-form"
-  action="{% url 'create_group' %}"
+  id="create-expense-form"
+  action="{% url 'create_expense' %}"
   method="post"
   class="max-w-md mx-auto my-6"
 >
   {% csrf_token %}
+  <input type="hidden" name="group_id" value="{{ group_id }}" />
   <div class="mb-6">
-    {% custom_input 'group_name' 'text' 'City Trip' 'Title' %}
+    {% custom_input 'name' 'text' 'Groceries' 'Expense name' %}
   </div>
   <div class="mb-6">
     {% custom_input 'amount' 'number' '60' 'Amount' %}
   </div>
-  {% dropdown 'payer' 'Paid By' 'participants-dropdown-button' 'participants-dropdown' participants current_user_as_participant %}
+  <div class="relative mb-6">
+    {% dropdown 'payer' 'Paid By' 'participants-dropdown-button' 'participants-dropdown' participants current_user_as_participant %}
+  </div>
+  <div class="mb-6">
+    <label
+      for=""
+      class="block mb-2 text-sm font-medium text-white"
+    >
+      Split
+    </label>
+    <ul class="w-full text-sm font-medium text-gray-900 bg-white border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      {% for participant in participants %}
+        <li class="w-full border-b border-gray-200 rounded-t-lg last:border-b-0 dark:border-gray-600">
+            <div class="flex items-center ps-3">
+                <input id="{{ participant.id }}-checkbox" name="{{ participant.id }}" checked type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                <label for="{{ participant.id }}-checkbox" class="w-full py-3 text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">
+                  {% if participant.is_current_user %}
+                    {{ participant.alias }} (me)
+                  {% else %}
+                    {{ participant.alias }}
+                  {% endif %}
+                </label>
+            </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% custom_submit_button 'Create expense' %}
 </form>
 <script type="module">
   const inlineDropdownSvg = `

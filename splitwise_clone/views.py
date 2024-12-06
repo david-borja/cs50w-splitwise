@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.shortcuts import render
 from django.urls import reverse
 from .utils import (
@@ -11,8 +11,9 @@ from .utils import (
     flatten_reimbursements,
     filter_reimbursements_by_person,
     filter_reimbursements_exclude_person,
+    format_amount,
 )
-from .models import User, UserGroup, UserAlias
+from .models import User, UserGroup, UserAlias, Expense
 
 EXPENSES_SECTION = "expenses"
 BALANCES_SECTION = "balances"
@@ -57,6 +58,30 @@ def create_group(request):
 
 @login_required()
 def create_expense(request):
+    if request.method == "POST":
+        group_id = request.POST["group_id"]
+        group = UserGroup.objects.get(pk=group_id)
+        data = request.POST.dict()
+        amount = format_amount(float(data["amount"]))
+        splitter_alias_ids = []
+        for key, value in data.items():
+            if value == "on":
+                splitter_alias_ids.append(key)
+
+        splitters = UserAlias.objects.filter(pk__in=splitter_alias_ids)
+        expense = Expense(
+            name=data["name"],
+            group=group,
+            amount=amount,
+            payer=UserAlias.objects.get(pk=data["payer"]),
+        )
+
+        with transaction.atomic():
+            expense.splitters.set(splitters)
+            expense.save()
+
+        return HttpResponseRedirect(reverse("group", kwargs={"group_id": group_id}))
+
     group_id = request.GET.get('group_id')
     participants = UserAlias.objects.filter(group=group_id).order_by('alias')
 
@@ -67,6 +92,7 @@ def create_expense(request):
             current_user_as_participant = participant
 
     return render(request, "splitwise_clone/create-expense.html", {
+        "group_id": group_id,
         "participants": participants,
         "current_user_as_participant": current_user_as_participant,
 })

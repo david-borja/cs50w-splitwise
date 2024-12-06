@@ -5,7 +5,7 @@
 <button
   id="{{ button_id }}"
   data-dropdown-toggle="dropdown"
-  class="text-white focus:ring-2 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-gray-700 hover:bg-gray-800 focus:ring-blue-500"
+  class="text-white focus:ring-2 focus:outline-none w-1/2 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center bg-gray-700 hover:bg-gray-800 focus:ring-blue-500 justify-between"
   type="button"
 >
   {{ default_value.alias }} (me)
@@ -27,15 +27,15 @@
 </button>
 <div
   id="{{ dropdown_id }}"
-  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+  class="absolute z-10 hidden overflow-hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg right-6 top-7 w-44 dark:bg-gray-700"
 >
   <ul
-    class="py-2 text-sm text-gray-700 dark:text-gray-200"
+    class="text-sm text-gray-700 border border-gray-600 rounded-lg dark:text-gray-200"
     aria-labelledby="dropdownDefaultButton"
   >
     {% for option in options %}
       <li
-        class="block px-4 py-2 option hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+        class="block px-4 py-2 overflow-hidden border-b border-gray-600 option hover:bg-gray-600 last:border-b-0 hover:text-white"
         data-participant="{{ option.id }}"
       >
         {% if option.is_current_user %}
