@@ -2,6 +2,7 @@ from django import template
 from django.conf import settings
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from ..utils import decimals
 import os
 
 register = template.Library()
@@ -74,7 +75,7 @@ def footer_create_button(id, visibility, form_url, text):
 
 
 @register.inclusion_tag("splitwise_clone/components/reimbursements-modal.html")
-def reimbursements_modal(modal_id, close_modal_button_id, balance_summary, my_reimbursements, suggested_reimbursements, user_alias):
+def reimbursements_modal(modal_id, close_modal_button_id, balance_summary, my_reimbursements, suggested_reimbursements, user_alias, group_id):
     return {
         "modal_id": modal_id,
         "close_modal_button_id": close_modal_button_id,
@@ -82,6 +83,7 @@ def reimbursements_modal(modal_id, close_modal_button_id, balance_summary, my_re
         "my_reimbursements": my_reimbursements,
         "suggested_reimbursements": suggested_reimbursements,
         "user_alias": user_alias,
+        "group_id": group_id,
     }
 
 
@@ -96,9 +98,23 @@ def dropdown(input_name, label, button_id, dropdown_id, options, default_value):
         "default_value": default_value
     }
 
+
+@register.inclusion_tag("splitwise_clone/components/reimbursement-form.html")
+def reimbursement_form(group_id, amount, sender, receiver):
+    return {
+        "group_id": group_id,
+        "amount": amount,
+        "sender": sender,
+        "receiver": receiver,
+    }
+
+
+register.filter('decimals', decimals)
+
+
 @register.filter
 def abs_value(value):
     try:
-        return abs(value)
+        return decimals(abs(value))
     except (TypeError, ValueError):
         return value

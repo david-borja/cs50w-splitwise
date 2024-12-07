@@ -1,3 +1,4 @@
+{% load custom_tags %}
 <article
   class="flex justify-between w-full px-4 py-2 mx-auto mb-2 text-white bg-gray-800 rounded-lg shadow"
 >
@@ -20,11 +21,11 @@
     <h5 class="grid place-content-center">{{ username }}</h5>
     {% endif %}
   </div>
-  {% if balance > 0 %}
-    <span class="grid text-green-400 place-content-center">+{{ balance }} €</span>
-  {% elif balance < 0 %}
-    <span class="grid text-red-400 place-content-center">{{ balance }} €</span>
+  {% if balance|decimals > 0 %}
+    <span class="grid text-green-400 place-content-center">+{{ balance|decimals }} €</span>
+  {% elif balance|decimals < 0 %}
+    <span class="grid text-red-400 place-content-center">{{ balance|decimals }} €</span>
   {% else %}
-    <span class="grid place-content-center">{{ balance }} €</span>
+    <span class="grid place-content-center">{{ balance|abs_value }} €</span>
   {% endif %}
 </article>

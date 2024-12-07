@@ -1,0 +1,17 @@
+<form
+  method="post"
+  action="{% url 'create_expense' %}"
+>
+  {% csrf_token %}
+  <input type="hidden" name="name" value="reimbursement" />
+  <input type="hidden" name="group_id" value="{{ group_id }}"/>
+  <input type="hidden" name="amount" value="{{ amount }}"/>
+  <input type="hidden" name="payer" value="{{ sender }}"/>
+  <input type="hidden" name="{{ receiver }}" value="on"/>
+  <button
+    type="submit"
+    class="px-3 py-1 mt-2 text-xs font-medium text-center text-white bg-blue-600 rounded-md reimbursement-button focus:ring-2 focus:outline-none hover:bg-blue-700 focus:ring-blue-800"
+  >
+    Mark as Paid
+  </button>
+</form>

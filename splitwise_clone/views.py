@@ -11,7 +11,7 @@ from .utils import (
     flatten_reimbursements,
     filter_reimbursements_by_person,
     filter_reimbursements_exclude_person,
-    format_amount,
+    decimals,
 )
 from .models import User, UserGroup, UserAlias, Expense
 
@@ -62,7 +62,7 @@ def create_expense(request):
         group_id = request.POST["group_id"]
         group = UserGroup.objects.get(pk=group_id)
         data = request.POST.dict()
-        amount = format_amount(float(data["amount"]))
+        amount = decimals(float(data["amount"]))
         splitter_alias_ids = []
         for key, value in data.items():
             if value == "on":
@@ -118,7 +118,6 @@ def group(request, group_id, section=DEFAULT_SECTION):
     my_expenses_amount = compute_expenses(my_expenses)
 
     balances = get_balances(expenses, group_aliases)
-
     balance_summary_amount = 0
     current_user_alias = ''
     for participant in participants:
@@ -129,6 +128,17 @@ def group(request, group_id, section=DEFAULT_SECTION):
 
     suggested_reimbursements = get_suggested_reimbursements(balances)
     flat_reimbursements = flatten_reimbursements(suggested_reimbursements)
+
+    for reimbursement in flat_reimbursements:
+        reimbursement["sender_id"] = UserAlias.objects.get(
+            alias=reimbursement["sender"],
+            group=group
+        ).id
+        reimbursement["receiver_id"] = UserAlias.objects.get(
+            alias=reimbursement["receiver"],
+            group=group
+        ).id
+
     my_reimbursements = filter_reimbursements_by_person(
         flat_reimbursements, current_user_alias
     )

@@ -6,11 +6,11 @@
     <main class="flex flex-col items-center">
       <h5 class="text-center">
         {% if balance_summary.amount > 0 %}
-          <p>You are Owed</p><span class="inline-block px-2 mt-1 bg-green-600 rounded-xl">{{ balance_summary.amount }} €</span>
+          <p>You are Owed</p><span class="inline-block px-2 mt-1 bg-green-600 rounded-xl">{{ balance_summary.amount|decimals }} €</span>
         {% elif balance_summary.amount < 0 %}
           <p>You Owe</p><span class="inline-block px-2 mt-1 bg-red-600 rounded-xl">{{ balance_summary.amount|abs_value }} €</span>
         {% else %}
-          <p>You are settled</p><span class="inline-block px-2 mt-1 bg-gray-600 rounded-xl">{{ balance_summary.amount }} €</span>
+          <p>You are settled</p><span class="inline-block px-2 mt-1 bg-gray-600 rounded-xl">{{ balance_summary.amount|decimals }} €</span>
         {% endif %}
         </h5>
       <section class="w-full px-4 mt-6 reimbursements-feed">
@@ -27,13 +27,8 @@
               {% if reimbursement.receiver == current_user_alias %}
                 (me)
               {% endif %}
-            <p>{{ reimbursement.amount }} €</p>
-            <button
-              type="submit"
-              class="px-3 py-1 mt-2 text-xs font-medium text-center text-white bg-blue-600 rounded-md focus:ring-2 focus:outline-none hover:bg-blue-700 focus:ring-blue-800"
-            >
-              Mark as Paid
-            </button>
+            <p>{{ reimbursement.amount|decimals }} €</p>
+            {% reimbursement_form group_id reimbursement.amount reimbursement.sender_id reimbursement.receiver_id %}
           </article>
           {% endfor %}
           {% if suggested_reimbursements %}
@@ -54,13 +49,8 @@
                 {% if reimbursement.receiver == current_user_alias %}
                   (me)
                 {% endif %}
-              <p>{{ reimbursement.amount }} €</p>
-              <button
-                type="submit"
-                class="px-3 py-1 mt-2 text-xs font-medium text-center text-white bg-blue-600 rounded-md focus:ring-2 focus:outline-none hover:bg-blue-700 focus:ring-blue-800"
-              >
-                Mark as Paid
-              </button>
+              <p>{{ reimbursement.amount|decimals }} €</p>
+              {% reimbursement_form group_id reimbursement.amount reimbursement.sender_id reimbursement.receiver_id %}
             </article>
             {% endfor %}
       </section>

@@ -1,9 +1,10 @@
 from decimal import Decimal, ROUND_HALF_UP
 
-def format_amount(amount):
+PRECISION = '0.01'
+
+def decimals(amount):
     decimal_amount = Decimal(str(amount))
-    precision = "0.01"
-    rounded_amount = decimal_amount.quantize(Decimal(precision), rounding=ROUND_HALF_UP)
+    rounded_amount = decimal_amount.quantize(Decimal(PRECISION), rounding=ROUND_HALF_UP)
     return rounded_amount
 
 
@@ -23,16 +24,23 @@ def get_balances(expenses, group_aliases):
         payer = expense.payer.alias
         splitters = expense.splitters.all()
         amount = expense.amount
-        split_amount = amount / len(splitters)
-        split_amount = format_amount(split_amount)
+        split_amount = amount/ len(splitters)
+        split_amount = split_amount
         for splitter in splitters:
-            is_payer = splitter.alias == payer
-            current_balance = balances[splitter.alias]
-            expense_balance = amount - split_amount if is_payer else split_amount
-            balance = current_balance + expense_balance if is_payer else current_balance - expense_balance
-            balances[splitter.alias] = balance
+            if expense.name == 'reimbursement':
+                balances[splitter.alias] = balances[splitter.alias] - split_amount
+                balances[payer] = balances[payer] + split_amount
+            else:
+                is_payer = splitter.alias == payer
+                current_balance = balances[splitter.alias]
+                expense_balance = amount - split_amount if is_payer else split_amount
+                balance = current_balance + expense_balance if is_payer else current_balance - expense_balance
+                balances[splitter.alias] = balance
+    filtered_balances = {}
+    for key, value in balances.items():
+            filtered_balances[key] = value if abs(value) >= float(PRECISION) else decimals(0)
 
-    return balances
+    return filtered_balances
 
 
 def get_top_debtors(balances):

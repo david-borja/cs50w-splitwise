@@ -11,17 +11,17 @@
 </div>
 <div class="flex p-1 mt-4 mb-6 text-center text-white bg-gray-800 rounded-lg">
   {% if section == SECTIONS.BALANCES %}
-  <button id="expenses-button" data-section="expenses" class="w-1/2">
+  <button id="expenses-button" data-section="expenses" class="w-1/2 group-navbar-button">
     Expenses
   </button>
-  <button id="balances-button" data-section="balances" class="w-1/2 selected">
+  <button id="balances-button" data-section="balances" class="w-1/2 group-navbar-button selected">
     <div class="bg-gray-600 rounded-md">Balances</div>
   </button>
   {% else %}
-  <button id="expenses-button" data-section="expenses" class="w-1/2 selected">
+  <button id="expenses-button" data-section="expenses" class="w-1/2 group-navbar-button selected">
     <div class="bg-gray-600 rounded-md">Expenses</div>
   </button>
-  <button id="balances-button" data-section="balances" class="w-1/2">
+  <button id="balances-button" data-section="balances" class="w-1/2 group-navbar-button">
     Balances
   </button>
   {% endif %}
@@ -47,7 +47,7 @@
       </section>
     </section>
     <section id="balances-section" class="{{ balances_visibility }}">
-      {% balance_summary balance_summary.amount "See how Antonio and Aragó need to pay you back" %}
+      {% balance_summary balance_summary.amount "See your suggested reimbursements" %}
       <article
         id="view-suggested-reimbursements-button"
         class="w-full p-3 mx-auto mb-2 text-sm text-center text-blue-500 bg-gray-800 rounded-lg shadow hover:cursor-pointer"
@@ -64,11 +64,12 @@
       </section>
     </section>
     {% footer_create_button "add-expense-button" expenses_visibility create_expense_form_url "Add Expense" %}
-    {% reimbursements_modal "my-reimbursements-modal" "close-my-reimbursements-button" balance_summary my_reimbursements None current_user_alias %}
-    {% reimbursements_modal "suggested-reimbursements-modal" "close-suggested-reimbursements-button" balance_summary my_reimbursements suggested_reimbursements current_user_alias %}
+    {% reimbursements_modal "my-reimbursements-modal" "close-my-reimbursements-button" balance_summary my_reimbursements None current_user_alias group.id %}
+    {% reimbursements_modal "suggested-reimbursements-modal" "close-suggested-reimbursements-button" balance_summary my_reimbursements suggested_reimbursements current_user_alias group.id %}
 </main>
 <script>
   const $ = (selector) => document.querySelector(selector)
+  const $$ = (selector) => document.querySelectorAll(selector)
   const EXPENSES = 'expenses'
   const serverSection = '{{ section }}'
 
@@ -80,7 +81,7 @@
     history.replaceState({ section: serverSection}, "", window.location.href)
   }
 
-  document.querySelectorAll('button').forEach((button) => {
+  $$('.group-navbar-button').forEach((button) => {
     button.onclick = function () {
       const section = history.state.section
       const { section: sectionClicked } = this.dataset
@@ -117,7 +118,6 @@
   }
 
   $('#close-my-reimbursements-button').onclick = () => {
-    console.log('close')
     $('#my-reimbursements-modal').classList.remove('block')
     $('#my-reimbursements-modal').classList.add('hidden')
   }

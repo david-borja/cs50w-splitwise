@@ -3,15 +3,15 @@
   id="view-my-reimbursements-button"
   class="flex justify-between w-full p-3 mx-auto mb-2 text-white bg-gray-800 rounded-lg shadow hover:cursor-pointer"
 >
-  {% if amount > 0 %}
+  {% if amount|decimals > 0 %}
     <div class="text-4xl">🤑</div>
     <div class="w-4/5">
-        <h5>You are owed {{ amount }} €</h5>
+        <h5>You are owed {{ amount|decimals }} €</h5>
         <p class="text-xs text-gray-300">
           {{ summary_details }}
         </p>
     </div>
-  {% elif amount < 0 %}
+  {% elif amount|decimals < 0 %}
     <div class="text-4xl">💸</div>
     <div class="w-4/5">
         <h5>You owe {{ amount|abs_value }} €</h5>
