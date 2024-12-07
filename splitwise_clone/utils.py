@@ -105,9 +105,10 @@ def flatten_reimbursements(reimbursements):
         sender = key
         receivers_obj = value
         for receiver_key, amount_value in receivers_obj.items():
-            flat_reimbursements.append(
-                {"sender": sender, "receiver": receiver_key, "amount": amount_value}
-            )
+            if amount_value > float(PRECISION):
+                flat_reimbursements.append(
+                    {"sender": sender, "receiver": receiver_key, "amount": amount_value}
+                )
 
     return flat_reimbursements
 
