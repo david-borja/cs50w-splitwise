@@ -80,7 +80,9 @@ def create_expense(request):
             expense.splitters.set(splitters)
             expense.save()
 
-        return HttpResponseRedirect(reverse("group", kwargs={"group_id": group_id}))
+        return HttpResponseRedirect(reverse(
+            "group_section",
+            kwargs={"group_id": group_id, "section": data["redirect_section"] }))
 
     group_id = request.GET.get('group_id')
     participants = UserAlias.objects.filter(group=group_id).order_by('alias')

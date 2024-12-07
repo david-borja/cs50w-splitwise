@@ -14,6 +14,7 @@
   class="max-w-md mx-auto my-6"
 >
   {% csrf_token %}
+  <input type="hidden" name="redirect_section" value="expenses" />
   <input type="hidden" name="group_id" value="{{ group_id }}" />
   <div class="mb-6">
     {% custom_input 'name' 'text' 'Groceries' 'Expense name' %}

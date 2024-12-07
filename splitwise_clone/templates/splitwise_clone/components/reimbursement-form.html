@@ -3,6 +3,7 @@
   action="{% url 'create_expense' %}"
 >
   {% csrf_token %}
+  <input type="hidden" name="redirect_section" value="balances" />
   <input type="hidden" name="name" value="reimbursement" />
   <input type="hidden" name="group_id" value="{{ group_id }}"/>
   <input type="hidden" name="amount" value="{{ amount }}"/>
