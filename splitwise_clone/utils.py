@@ -11,7 +11,8 @@ def decimals(amount):
 def compute_expenses(expenses):
     total = 0
     for expense in expenses:
-        total += expense.amount
+        if expense.name != 'reimbursement':
+            total += expense.amount
     return total
 
 
