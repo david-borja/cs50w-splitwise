@@ -1,7 +1,7 @@
 <input type="hidden" name="participant" id="selectedParticipant" />
 {% extends "splitwise_clone/layout.html" %} {% load custom_tags %}
 {% block body %}
-<header class="mt-4">
+<header class="inline-block mt-4">
   <a href="{% url 'group' group_id %}" class="flex hover:cursor-pointer">
     {% svg_icon 'left-arrow' %}
     <span class="grid text-xl text-white place-content-center">Expenses</span>
