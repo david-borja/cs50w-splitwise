@@ -164,7 +164,7 @@ def group(request, group_id, section=DEFAULT_SECTION):
             "current_user_alias": current_user_alias,
             "expenses": expenses,
             "expenses_summary": {
-                "my_expenses": my_expenses_amount,
+                "my_expenses": my_expenses_amount - balance_summary_amount,
                 "total_expenses": total_expenses_amount,
             },
             "balance_summary": {"amount": balance_summary_amount},
