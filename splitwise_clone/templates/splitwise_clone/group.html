@@ -67,7 +67,7 @@
     {% reimbursements_modal "my-reimbursements-modal" "close-my-reimbursements-button" balance_summary my_reimbursements None current_user_alias group.id %}
     {% reimbursements_modal "suggested-reimbursements-modal" "close-suggested-reimbursements-button" balance_summary my_reimbursements suggested_reimbursements current_user_alias group.id %}
 </main>
-<script>
+<script type="module">
   const $ = (selector) => document.querySelector(selector)
   const $$ = (selector) => document.querySelectorAll(selector)
   const EXPENSES = 'expenses'
@@ -128,7 +128,6 @@
   }
 
   $('#close-suggested-reimbursements-button').onclick = () => {
-    console.log('close')
     $('#suggested-reimbursements-modal').classList.remove('block')
     $('#suggested-reimbursements-modal').classList.add('hidden')
   }
