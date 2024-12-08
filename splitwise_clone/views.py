@@ -115,6 +115,14 @@ def group(request, group_id, section=DEFAULT_SECTION):
         group_aliases.append(participant.alias)
 
     expenses = group.group_expenses.order_by('-timestamp')
+
+    for expense in expenses:
+        expense_participants = []
+        for splitter in expense.splitters.all():
+            if splitter.id != expense.payer.id:
+                expense_participants.append(splitter.alias)
+        expense.participants_string = ', '.join(expense_participants)
+
     total_expenses_amount = compute_expenses(expenses)
 
     my_expenses = UserAlias.objects.get(user=request.user, group=group).acquisitions.all()

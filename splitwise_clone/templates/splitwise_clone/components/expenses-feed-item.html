@@ -8,9 +8,9 @@
       <div class="grid text-3xl place-content-center">{{ icon }}</div>
       <div>
         <h5>{{ name }}</h5>
-        <p class="text-xs text-gray-300">{{ description }}<strong>{{ payer }}</strong></p>
+        <p class="text-xs text-gray-300">{{ description }}<strong>{{ payer }}</strong><span> - Participants: </span><strong>{{ participants_string }}</strong></p>
       </div>
     </div>
-    <span class="grid place-content-center">{{ amount|decimals }} €</span>
+    <span class="grid place-content-center whitespace-nowrap">{{ amount|decimals }} €</span>
   </article>
 </li>

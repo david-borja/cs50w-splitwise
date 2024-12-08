@@ -41,7 +41,7 @@
       <section id="expenses-feed" class="pb-6 mt-6">
         <ol class="flex flex-col gap-4">
           {% for expense in expenses %}
-            {% expenses_feed_item expense.timestamp expense.icon expense.name "Paid by " expense.payer.alias expense.amount %}
+            {% expenses_feed_item expense.timestamp expense.icon expense.name "Paid by " expense.payer.alias expense.amount expense.participants_string %}
           {% endfor %}
         </ol>
       </section>
