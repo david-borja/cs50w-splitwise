@@ -22,9 +22,9 @@ The project demonstrates complexity through:
   - Settled reimbursements are seen on the expenses feed, but their amount is not taken in account for the calculated 'total expenses' and 'my expenses'
 - Separate User and Alias model - created group memebers are regarded as universally unique aliases.
   - Future feature: group members can receive a link to claim their alias in a group and become app users
-- Custom interactivity of the app state with JavaScript combined with modifying the url accordingly (ie: expenses/balances section)
+- Custom interactivity of the app state with JavaScript combined with modifying the url accordingly (ie: expenses/balances section).
 - Integration of Django Tailwind for enhanced styling and responsiveness.
-- Mock data and seed script to easily see the app functionality in action
+- Mock data and seed script to easily see the app functionality in action.
 
 ## File Structure
 The main files that power up the app are found in:
@@ -33,7 +33,7 @@ The main files that power up the app are found in:
 - utils.py: calculation functionality, extracted to allow reusability or to simplify views.py
 - views.py: this file manages the server funcionality depending on the endpoint. Here we can find the functions to list, create, check, validate, and update resources in the db
 
-Inline JavaScript code is found in the very same html files, using the script tag, and the modern type module. This allows us to load the JavaScript after the HTML without listening to the DOMContentLoaded event.
+Inline JavaScript code is found in the very same html files, using the script tag, and the modern type module. This allows us to load JavaScript after HTML without listening to the DOMContentLoaded event.
 The JS code is found in:
 - group.html
 - create-expense.html
