@@ -16,6 +16,7 @@
   {% csrf_token %}
   <input type="hidden" name="redirect_section" value="expenses" />
   <input type="hidden" name="group_id" value="{{ group_id }}" />
+  <input type="hidden" name="icon" value="💸" />
   <div class="mb-6">
     {% custom_input 'name' 'text' 'Groceries' 'Expense name' %}
   </div>

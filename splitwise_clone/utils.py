@@ -11,7 +11,7 @@ def decimals(amount):
 def compute_expenses(expenses):
     total = 0
     for expense in expenses:
-        if expense.name != 'reimbursement':
+        if expense.name != 'Reimbursement':
             total += expense.amount
     return total
 
@@ -28,7 +28,7 @@ def get_balances(expenses, group_aliases):
         split_amount = amount/ len(splitters)
         split_amount = split_amount
         for splitter in splitters:
-            if expense.name == 'reimbursement':
+            if expense.name == 'Reimbursement':
                 balances[splitter.alias] = balances[splitter.alias] - split_amount
                 balances[payer] = balances[payer] + split_amount
             else:

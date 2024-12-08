@@ -71,6 +71,7 @@ def create_expense(request):
         splitters = UserAlias.objects.filter(pk__in=splitter_alias_ids)
         expense = Expense(
             name=data["name"],
+            icon=data["icon"],
             group=group,
             amount=amount,
             payer=UserAlias.objects.get(pk=data["payer"]),
