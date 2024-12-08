@@ -42,15 +42,21 @@ The JS code is found in:
 ## Installation (one time):
 ### Option 1 (granular deps)
 - python3 manage.py migrate
+- python3 manage.py seed_db
 - python3 -m pip install django-tailwind
 - python3 -m pip install 'django-tailwind[reload]'
 - python3 manage.py tailwind install
 
 ### Option 2 (deps with requirements.txt)
 - python3 manage.py migrate
+- python3 manage.py seed_db
 - pip3 install -r requirements.txt
 - python3 manage.py tailwind install
 
 ## Project Start (every time to get the project running):
 - python3 manage.py tailwind start
 - python3 manage.py runserver
+
+Default app credentials (recommended for validations):
+- user: david
+- password: 1234
