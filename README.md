@@ -54,7 +54,7 @@ The JS code is found in:
 - python3 manage.py tailwind install
 
 ## Project Start (every time to get the project running):
-- python3 manage.py tailwind start
+- python3 manage.py tailwind start (leave this script running on a separate terminal tab)
 - python3 manage.py runserver
 
 Default app credentials (recommended for validations):
