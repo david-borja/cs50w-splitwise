@@ -24,7 +24,7 @@ The project demonstrates complexity through:
   - Future feature: group members can receive a link to claim their alias in a group and become app users
 - Custom interactivity of the app state with JavaScript combined with modifying the url accordingly (ie: expenses/balances section).
 - Integration of Django Tailwind for enhanced styling and responsiveness.
-- Mock data and seed script to easily see the app functionality in action.
+- Mock data and seed script (/management/commands/seed_db.py) to easily see the app functionality in action.
 
 ## File Structure
 The main files that power up the app are found in:
