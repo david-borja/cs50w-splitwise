@@ -21,7 +21,8 @@ The project demonstrates complexity through:
   - Balances are always dynamic and calculated on the fly, while expenses are permanent and stored in the db.
   - Settled reimbursements are seen on the expenses feed, but their amount is not taken in account for the calculated 'total expenses' and 'my expenses'
 - Separate User and Alias model - created group memebers are regarded as universally unique aliases.
-  - Future feature: group members can receive a link to claim their alias in a group and become app users
+  - A single app user can have a different name (alias) accross multiple groups  
+  - Future feature: group members (aliases) can receive a link to claim their alias in a group and become app users
 - Custom interactivity of the app state with JavaScript combined with modifying the url accordingly (ie: expenses/balances section).
 - Integration of Django Tailwind for enhanced styling and responsiveness.
 - Mock data and seed script (/management/commands/seed_db.py) to easily see the app functionality in action.
