@@ -31,7 +31,6 @@ openai==0.27.6
 packaging==23.2
 pathspec==0.12.1
 platformdirs==4.2.0
-psycopg2==2.9.5
 Pygments==2.16.1
 python-dateutil==2.8.2
 python-decouple==3.8

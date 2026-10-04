@@ -42,22 +42,48 @@ The JS code is found in:
 
 ## Installation (one time):
 ### Option 1 (granular deps)
-- python3 manage.py migrate
-- python3 manage.py seed_db
 - python3 -m pip install django-tailwind
 - python3 -m pip install 'django-tailwind[reload]'
+- python3 -m pip install whitenoise gunicorn
+- python3 manage.py migrate
+- python3 manage.py seed_db
 - python3 manage.py tailwind install
 
 ### Option 2 (deps with requirements.txt)
+- pip3 install -r requirements.txt
 - python3 manage.py migrate
 - python3 manage.py seed_db
-- pip3 install -r requirements.txt
 - python3 manage.py tailwind install
 
 ## Project Start (every time to get the project running):
+Debug is off by default (`DJANGO_DEBUG` defaults to `False`), so enable it for local development:
+- export DJANGO_DEBUG=True
 - python3 manage.py tailwind start (leave this script running on a separate terminal tab)
 - python3 manage.py runserver
 
 Default app credentials (recommended for validations):
 - user: david
 - password: 1234
+
+## Deployment (Render, SQLite)
+Environment variables:
+- `DJANGO_SECRET_KEY`: long random string
+- `DJANGO_DEBUG`: `False`
+- `ALLOWED_HOSTS`: Render domain without `https://`
+- `CSRF_TRUSTED_ORIGINS`: Render domain with `https://`
+- `RENDER_DISK_PATH`: persistent disk mount path (e.g. `/var/data`)
+- `PYTHON_VERSION`: `3.11.11`
+
+Build command:
+```
+pip install -r requirements.txt && cd theme/static_src && npm ci && npm run build && cd ../.. && python manage.py collectstatic --noinput
+```
+
+Start command (migrations run here because the disk is not mounted during build):
+```
+python manage.py migrate && gunicorn final_project.wsgi:application
+```
+
+Notes:
+- Keep a single instance, since SQLite lives on one disk.
+- Do not leave `DJANGO_DEBUG=True` in production.

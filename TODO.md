@@ -1,0 +1,3 @@
+- Check why when a payment is made for the other person, it doesn't show up in reimbursements (coffee machine example)
+- Check if the db restarts after every deploy
+- Check how to implement db management with SQL client
