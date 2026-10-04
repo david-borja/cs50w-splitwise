@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import include, path
 from django.views.generic.base import RedirectView
 from . import views
@@ -12,5 +13,7 @@ urlpatterns = [
     path("create-expense", views.create_expense, name="create_expense"),
     path("groups/<str:group_id>", views.group, name="group"),
     path("groups/<str:group_id>/<str:section>", views.group, name="group_section"),
-    path("__reload__", include("django_browser_reload.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [path("__reload__", include("django_browser_reload.urls"))]
