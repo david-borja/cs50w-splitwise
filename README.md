@@ -49,8 +49,8 @@ The JS code is found in:
 - python3 manage.py seed_db
 - python3 manage.py tailwind install
 
-### Option 2 (deps with requirements.txt)
-- pip3 install -r requirements.txt
+### Option 2 (deps with requirements-dev.txt)
+- pip3 install -r requirements-dev.txt
 - python3 manage.py migrate
 - python3 manage.py seed_db
 - python3 manage.py tailwind install
@@ -64,6 +64,13 @@ Debug is off by default (`DJANGO_DEBUG` defaults to `False`), so enable it for l
 Default app credentials (recommended for validations):
 - user: david
 - password: 1234
+
+## Testing
+Run all tests with
+- python3 -m pytest
+
+Run a test file with
+- python3 -m pytest splitwise_clone/tests/test_auth.py
 
 ## Deployment (Render, SQLite)
 Environment variables:
