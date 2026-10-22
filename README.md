@@ -2,7 +2,7 @@
 
 ## Video App Walkthrough
 <a href='https://youtu.be/5NO36mTA6L0' target='_blank'>
-  <img width='50%' src='https://i9.ytimg.com/vi_webp/5NO36mTA6L0/mqdefault.webp?v=6ad7f3e5&sqp=CJzn39YG&rs=AOn4CLCVJ-OAx8Qyt6QrFWTTwnXWiXt5XA' alt='Video demostración de la app de finanzas Splitwise Clone' />
+  <img width='50%' src='https://i9.ytimg.com/vi_webp/5NO36mTA6L0/mqdefault.webp?v=6ad7f3e5&sqp=CNzx6NYG&rs=AOn4CLD0_bDV7n3mQOkJ-X5DTHlsTiqAkw' alt='Video demostración de la app de finanzas Splitwise Clone' />
 </a>
 
 ## Overview
