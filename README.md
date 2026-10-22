@@ -1,9 +1,7 @@
 # Final Project | Splitwise Clone
 
 ## Video App Walkthrough
-<a href='https://youtu.be/5NO36mTA6L0' target='_blank'>
-  <img width='50%' src='https://i9.ytimg.com/vi_webp/5NO36mTA6L0/mqdefault.webp?v=6ad7f3e5&sqp=CNzx6NYG&rs=AOn4CLD0_bDV7n3mQOkJ-X5DTHlsTiqAkw' alt='Video demostración de la app de finanzas Splitwise Clone' />
-</a>
+[![Ver vídeo demostración de la app de finanzas Splitwise Clone](https://i.ytimg.com/vi/5NO36mTA6L0/hqdefault.jpg)](https://youtu.be/5NO36mTA6L0)
 
 ## Overview
 The Splitwise Clone is a Python Django web-based application designed to simplify shared expenses. It allows users to manage group expenses, track balances, and manage reimbursements efficiently. Unlike a social network or e-commerce site, this project focuses specifically on collaborative expense management.
